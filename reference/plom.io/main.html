@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://web.archive.org/web/20130714114830/http://plom.io/cli -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="./main_files/analytics.js"></script><style type="text/css"></style>
+<link type="text/css" rel="stylesheet" href="./main_files/banner-styles.css">
+
+
+
+
+
+    <title>PLOM.IO Social Modeling</title>
+
+    <meta name="description" content="PLoM.io Public Library of Models">
+    <meta name="keywords" content="PLoM model data inference social">
+    <meta name="author" content="Sebastien Ballesteros">
+
+    <link rel="stylesheet" media="screen" type="text/css" href="./main_files/jquery-ui-1.10.2.custom.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./main_files/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./main_files/prettify.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./main_files/doc.css">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	<script src="/web/20130714114830/http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="./main_files/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./main_files/set_active_menu.js"></script>
+    <script src="./main_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./main_files/prettify.js"></script>
+    <script type="text/x-mathjax-config;executed=true"> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+    <script type="text/javascript" src="./main_files/MathJax.js"></script>
+
+
+<link rel="stylesheet" media="screen" type="text/css" href="./main_files/intro.css">
+<link rel="stylesheet" media="screen" type="text/css" href="./main_files/white.css">
+<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+
+  <body onload="prettyPrint()"><div id="MathJax_Message" style="display: none;"></div><div id="wm-ipp" lang="en" class="__wb_banner_div" style="display: block; position: relative; padding: 0px 5px; min-height: 70px; min-width: 800px;">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif!important;">
+   <table style="border-collapse:collapse;margin:0;padding:0;width:100%;"><tbody></tbody></table>
+
+</div>
+</div>
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app19.us.archive.org";}; </script>
+
+<script type="text/javascript" src="./main_files/disclaim-element.js"></script>
+<script type="text/javascript" src="./main_files/graph-calc.js"></script>
+<script type="text/javascript" src="./main_files/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/plom.io\/cli";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "14";
+var displayMonth = "Jul";
+var displayYear = "2013";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+
+  <div id="wrap">
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <a class="brand" href="https://web.archive.org/web/20130714114830/http://plom.io/">PLOM.IO Public Library of Models</a>
+
+
+          <ul class="nav pull-right">
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/faq"><i class="icon-question-sign icon-white"></i></a></li>        
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/api">API</a></li>        
+              <li><a href="./main_files/main.html">CLI</a></li>        
+            
+            <li> <a href="https://web.archive.org/web/20130714114830/http://plom.io/login">Login</a> </li>
+            <li> <a href="https://web.archive.org/web/20130714114830/http://plom.io/register">Register</a> </li>
+            
+          </ul>
+
+          <form action="https://web.archive.org/web/20130714114830/http://plom.io/search" class="navbar-search" method="POST">
+            <input class="search-query" type="text" name="q" id="plom-search" placeholder="Search the library for contexts or models">
+            
+            <button type="submit" class="btn hide">Search</button>
+          </form>
+          
+        </div>
+        <div id="topGradient" class="plom-gradient"></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+
+<div id="main">
+
+  <a href="https://web.archive.org/web/20130714114830/https://github.com/plom-io"><img style="position:absolute; top:42px; right:0;  border: 0;" src="./main_files/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+  <div id="plom-main" class="hero-unit">
+    <h1><span class="cli">&gt; </span>PLOM.IO CLI</h1>
+
+    <p class="plom-brand">Command Line Interface</p>
+
+    <img src="./main_files/logo-large.png" class="plom-logo-center" alt="plom-logo">
+  </div>
+
+  <div class="row">
+    <div class="span6">
+      <h2>Learn the concepts</h2>
+
+      <ol class="list-compact">
+        <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/grammar">A layered grammar for compartmental state-space models (context.json, process.json, link.json, theta.json)</a></li>
+        <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/methods">Inference methods with a taste of Unix philosophy</a></li>
+        <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/hpc">High Performance Computing</a></li>
+        <!--<li><a href="/doc/modeler/hfmd">Integrated inference strategy</a></li>
+        <li><a href="/doc/modeler/h1n1">Capturing unknown variations of key parameters</a></li>
+        <li><a href="/doc/modeler/refs">References</a></li>-->
+      </ol>
+    </div>
+
+    <div class="span6">
+      <h2>Install the package</h2>
+
+      <p>
+        <img class="pull-right" src="./main_files/npm.png">
+        First make sure that you have installed <a href="https://web.archive.org/web/20130714114830/http://nodejs.org/">Node.js</a>.
+        Then, install plom command line interface with <code>npm</code> (<code>npm</code> comes with Node.js):
+        </p><pre class="prettyprint">npm install plom -g</pre>        
+      <p></p>
+
+
+      <div class="alert alert-danger">
+        <code>plom</code> is under active development and
+        is <strong>not</strong> ready for production yet. Join us
+        on <a href="https://web.archive.org/web/20130714114830/https://github.com/plom-io">github</a> to get
+        involved.
+      </div>
+
+    </div>
+  </div>
+
+  <h2 id="workflow">Get Started <small> Use the CLI to search, clone, build, infer, commit and get feedback.</small></h2>
+
+  <div class="row">
+    <div class="span6">    
+      <ol>
+        <li>
+          <strong>Search</strong> the library for a model. Let's take the Bubonic plague in the Eastern Roman Empire as an example.
+          <pre class="prettyprint">plom search "Eastern Roman Empire" -d plague</pre>
+          The <code>-d --disease</code> option restricts your search to
+          the specified disease. Run <code>plom help</code> to see
+          all the available options.
+        </li>
+
+        <li>
+          <strong>Clone</strong> the models matching your search.
+          <pre class="prettyprint">plom clone "Eastern Roman Empire" -d plague</pre>
+
+          <aside>
+            We get new directories each containing 4 files:
+            <ul class="list-compact">
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/grammar#context">context.json</a>: the context of your model (containing the data)</li>
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/grammar#process">process.json</a>: the process model definition</li>
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/grammar#link">link.json</a>: the observation model defininition linking the process to the data</li>
+              <li><a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/grammar#theta">theta.json</a>: the parameter values, reflecting the current consensus within the PLOM.IO community.</li>
+            </ul>
+          </aside>
+        </li>
+
+
+        <li>
+          <strong>Build</strong> one of those models starting with theta.json as the parameters (<code>-t</code>).
+          <pre class="prettyprint">plom build -t theta.json</pre> We now
+          have a <code>model/</code> directory containing:
+          <ul class="list-compact">
+            <li>an <em>expanded</em> version of the model, adapted to its context, coded in C.</li>
+            <li>ready to go binaries for plug-and-play infererence methods <em>plugged</em> to our model (also coded in C).</li>
+          </ul>
+        </li>
+        
+
+        <li>
+          <strong>Infer</strong> theta <a href="https://web.archive.org/web/20130714114830/http://plom.io/cli/methods">chaining</a> inference methods that were just built:
+          <ul class="list-compact">
+            <li>
+              Start for instance by piping theta.json into a simplex algorithm running for at max 10000 iterations (<code>-M</code>).
+              <pre class="prettyprint">plom pipe theta.json | ./simplex -M 10000</pre>
+            </li>
+            <li>
+              Pipe the previous results (stored in trace_0.csv) into theta.json (<code>-T trace_0.csv</code>) and keep going with, for example, a pMCMC algorithm for 1000000 iterations (<code>-M</code>).
+              <pre class="prettyprint">plom pipe theta.json -T trace_0.csv | ./pmcmc -M 1000000</pre>
+            </li>
+          </ul>
+        </li>
+
+      </ol>
+    </div>
+
+    <div class="span6">
+      <ol start="5">
+
+        <li>
+          Make inference <em>robust</em> and <em>reproducible</em> with <strong>designs</strong>.
+
+          <ul class="list-compact">
+            <li>
+              Maximize your chance of finding the global mode with, for
+              instance
+              a <a href="https://web.archive.org/web/20130714114830/http://en.wikipedia.org/wiki/Latin_hypercube_sampling">Latin
+              Hypercube Sampling (LHS)</a> design within the prior
+              boundaries and an optimization method.
+              <ul class="list-compact">
+                <li>
+                  <strong>template</strong> a design.json named design_lhs.json (<code>-o</code>)
+                  <pre class="prettyprint">plom design lhs -o design_lhs.json</pre>
+                  <small>By default an LHS design will use a simplex algorithm, accounting for the prior with the <code>--prior</code> option.</small>
+                </li>
+                <li>
+                  <strong>bootstrap</strong> it starting from theta.json and <strong>run</strong> it on your <em>local</em> machine (leveraging all your computer cores).
+                  <pre class="prettyprint">plom bootstrap theta.json design_lhs.json --run</pre>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Then, sample from the posterior density
+              $p(\theta,x_{0:n}|y_{1:n})$.
+
+              <ul>
+                <li>
+                  <strong>Reduce</strong> the LHS design to it's best
+                  value and store it in a new theta.json named mle.json (<code>-o</code>)
+                  <pre class="prettyprint">plom reduce design_lhs.json -o mle.json</pre>
+                </li>
+
+                <li>
+                  Rely on Bayesian inference algorithms to compare the prior and posterior
+                  densities and derive model choice indicators to
+                  compare theories.
+                  <pre class="prettyprint">plom design replicate -o design_sample.json</pre>
+
+                  <small>By default a replicate design will use a pmcmc algorithm.</small>
+                  <pre class="prettyprint">plom bootstrap mle.json design_sample.json --run</pre>
+                  
+                </li>
+
+              </ul>
+
+            </li>
+
+          </ul>
+
+
+        </li>
+
+        <li>
+          <strong>Commit</strong> the results of your designs to the
+          library.
+          <pre class="prettyprint">plom commit design_sample.json</pre>
+
+          If you need more computational power: commit
+          your <strong>pipeline</strong> of designs (and the initial
+          theta.json) and <strong>run them in the cloud</strong>.
+          <pre class="prettyprint">plom commit theta.json design_lhs.json design_sample.json --run</pre>
+        </li>
+
+        <li>
+          See the effects of <strong>social</strong> modeling.  Point your browser to the
+          echoed link to interactively review your results on PLOM.IO 
+	  and follow the community reaction to your findings.
+        </li>             
+      </ol>
+    </div>
+  </div>
+
+
+</div>
+
+</div> <!-- end container -->
+<div id="push"></div>
+</div> <!-- end wrap -->
+
+<div id="footerGradient" class="plom-gradient"></div>
+<footer>
+  <div class="container">
+    
+    <p>© Copyright 2013 PLOM.IO. All rights reserved.</p>
+
+    <a href="https://web.archive.org/web/20130714114830/http://plom.io/">Home</a> | <a href="https://web.archive.org/web/20130714114830/http://plom.io/about">About us</a> | <a href="https://web.archive.org/web/20130714114830/http://plom.io/weblog">Weblog</a>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 11:48:30 Jul 14, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 14:27:01 Jul 22, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+</body></html>

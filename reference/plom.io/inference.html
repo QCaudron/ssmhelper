@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://web.archive.org/web/20130715205144/http://plom.io/cli/methods -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="./inference_files/analytics.js"></script><style type="text/css"></style>
+<link type="text/css" rel="stylesheet" href="./inference_files/banner-styles.css">
+
+
+
+
+
+    <title>PLOM.IO Social Modeling</title>
+
+    <meta name="description" content="PLoM.io Public Library of Models">
+    <meta name="keywords" content="PLoM model data inference social">
+    <meta name="author" content="Sebastien Ballesteros">
+
+    <link rel="stylesheet" media="screen" type="text/css" href="./inference_files/jquery-ui-1.10.2.custom.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./inference_files/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./inference_files/prettify.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./inference_files/doc.css">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	<script src="/web/20130715205144/http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="./inference_files/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./inference_files/set_active_menu.js"></script>
+    <script src="./inference_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./inference_files/prettify.js"></script>
+    <script type="text/x-mathjax-config;executed=true"> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+    <script type="text/javascript" src="./inference_files/MathJax.js"></script>
+
+
+<link rel="stylesheet" media="screen" type="text/css" href="./inference_files/white.css">
+<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+
+  <body onload="prettyPrint()"><div id="MathJax_Message" style="display: none;"></div><div id="wm-ipp" lang="en" class="__wb_banner_div" style="display: block; position: relative; padding: 0px 5px; min-height: 70px; min-width: 800px;">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif!important;">
+   
+
+</div>
+</div>
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app14.us.archive.org";}; </script>
+
+<script type="text/javascript" src="./inference_files/disclaim-element.js"></script>
+<script type="text/javascript" src="./inference_files/graph-calc.js"></script>
+<script type="text/javascript" src="./inference_files/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/plom.io\/cli\/methods";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "15";
+var displayMonth = "Jul";
+var displayYear = "2013";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+
+  <div id="wrap">
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <a class="brand" href="https://web.archive.org/web/20130715205144/http://plom.io/">PLOM.IO Public Library of Models</a>
+
+
+          <ul class="nav pull-right">
+              <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/faq"><i class="icon-question-sign icon-white"></i></a></li>        
+              <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/api">API</a></li>        
+              <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/cli">CLI</a></li>        
+            
+            <li> <a href="https://web.archive.org/web/20130715205144/http://plom.io/login">Login</a> </li>
+            <li> <a href="https://web.archive.org/web/20130715205144/http://plom.io/register">Register</a> </li>
+            
+          </ul>
+
+          <form action="https://web.archive.org/web/20130715205144/http://plom.io/search" class="navbar-search" method="POST">
+            <input class="search-query" type="text" name="q" id="plom-search" placeholder="Search the library for contexts or models">
+            
+            <button type="submit" class="btn hide">Search</button>
+          </form>
+          
+        </div>
+        <div id="topGradient" class="plom-gradient"></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+
+</div>
+
+<div id="submenu">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <ul class="breadcrumb">
+          <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/cli">CLI</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/cli/grammar">Grammar</a> <span class="divider">»</span></li>
+          <li class="active"><a href="./inference_files/inference.html">Methods</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/cli/hpc">High Performance Computing</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130715205144/http://plom.io/cli#workflow">Workflow</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="main">
+
+    <div class="page-header">
+      <h1>Chaining inference algorithms <small>UNIX philosophy</small></h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span8">
+
+        <h3>Inference commands as atomic units</h3>
+
+        <h4>By distilling inference down to atomic units, we can simply:</h4>
+
+        <ol>
+          <li>Display a theta.json on <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29">stdout</a>.</li>
+          <li>Consume it in an inference algorithm, reading it from
+          <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Standard_streams#Standard_input_.28stdin.29">stdin</a>.</li>
+        </ol>
+
+        <p>
+          Using Unix <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Cat_(Unix)"><code>cat</code></a> program and a <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Pipeline_(Unix)">Pipe</a> (<code>|</code>), it translates to:        
+          <code>cat theta.json | algorithm</code>
+        </p>
+
+        <h4>The benefit of using Unix pipes</h4>
+
+        <p>
+          One could contest our use of <code>cat</code> and
+          call for the use of
+          <code>algorithm &lt; theta.json</code> which has the same
+          effect of feeding algorithm with theta.json but things
+          become interesting when we replace <code>cat</code> by
+          another program that can <strong>generate new theta.json from
+          previous results</strong> without modifying the original
+          theta.json file.
+        </p>
+
+        <p>
+          For instance, if you have results from a long
+          simplex run (in a file named <code>trace_0.csv</code>) and
+          you now want to use them as the starting condition of
+          a pMCMC algorithm to sample the mode you found,
+
+          <code>plom pipe theta.json -T trace_0.csv</code> will
+          generate a new theta.json on stdout from the simplex
+          results.  We can then give this output to our pMCMC algorithm
+          using a pipe (<code>|</code>).
+
+          <code>plom pipe theta.json -T trace_0.csv | ./pmcmc</code>
+        </p>
+        
+        <p>
+          If we generalize this, we obtain PLOM.IO atomic inference
+          command, allowing you to <strong>chain inference methods
+          from the command line</strong>.
+        </p>
+
+        
+        <pre class="prettyprint">plom pipe theta.json [options] | ./algorithm [implementation] [options]</pre>
+        
+      </div>
+
+
+      <div class="span4">
+        <h3>Outputs</h3>
+
+        <p>
+          The inference programs generate csv outputs whose names are
+          appended by an <code>id</code> determined by the <code>-i,
+            --id</code> option of the algorithms.
+        </p>
+
+        <ul>
+          <li>
+            <code>trace_id.csv</code> File containing parameter values as a function of
+            the algorithm iterations. <br>
+            <i class="icon-repeat"> </i> <code>plom pipe -T</code>.
+          </li>
+          <li>
+            <code>X_id.csv</code> File containing state variables as a function of
+            time for each realization. <br>
+            <i class="icon-repeat"> </i>  <code>plom predict -X</code>.
+          </li>
+          <li>
+            <code>hat_id.csv</code> File containing the summary (empirical confidence
+            envelope) of the state variables. <br> 
+            <i class="icon-repeat"> </i>  <code>plom pipe -X</code>.
+          </li>
+          <li>
+            <code>covariance_id.csv</code> File containing the empirical covariance matrix. <br> 
+            <i class="icon-repeat"> </i>  <code>plom pipe -C</code>.
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+
+
+    <div class="page-header">
+      <h1>Implementation <small>Different levels of approximation</small></h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span4">
+        <h3>Poisson process with stochastic rates, 'psr'</h3>
+
+        <p>
+          In a finite population, infection dynamics
+          are <strong>intrinsically stochastic</strong> and the number
+          of individuals is <strong>discrete</strong>. The 'psr'
+          formalism is a natural way to <strong>preserve these
+            properties</strong> while remaining computationnally tractable,
+          independent of the population size.
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://arxiv.org/pdf/0802.0021.pdf">Breto, C. et al (2009)</a>
+	</p>
+
+      </div>
+
+      <div class="span4">
+        <h3>Stochastic Differential Equations, SDEs</h3>
+
+        <p>
+          Diffusion processes are a ubiquitous family of models used
+          to monitor the <strong>stochastic evolution of continuous
+          quantities </strong> over time.  As such, the literature and
+          methodology on the subject is abundant. We particularly rely
+          on approximate filtering solutions introduced by Rudoplh
+          Kalman in the 60s, and subsequent developments.
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/https://sites.google.com/site/dureaujoseph/academic-communication/JDureau_Thesis.pdf?attredirects=0&d=1">Dureau, J. (2013)</a>
+	</p>
+
+      </div>
+
+      <div class="span4">
+        <h3>Ordinary Differential Equations, ODEs</h3>
+
+        <p>
+          If <strong>all sources of noise are neglected</strong>, the
+          evolution of epidemics over time is deterministic. Unless
+          you are inclined to consider that your population is sufficiently large
+          and that all environmental factors are explicitely included in
+          your model, results obtained under this formalism should be
+          reviewed with caution.
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://rspa.royalsocietypublishing.org/content/115/772/700.full.pdf+html">Kermack, W. and McKendrick, A. (1927)</a>
+	</p>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="span12">
+
+        <p>
+          The formalisms highlighted above correspond to
+          the <code>psr</code>, <code>sde</code> and <code>ode</code>
+          commands, respectively, of PLOM.IO inference algorithms. Their use will be
+          illustrated in the following sections.  If you want to
+          explicitly cancel the effect of one source of stochasticity
+          included in your model, you can use the following
+          options <code>--no_dem_sto</code>, <code>--no_white_noise</code>
+          or <code>--no_diff</code>.
+        </p>
+
+      </div> 
+    </div>
+
+    <div class="page-header">
+      <h1>Simulation and filtering <small>trajectories</small></h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span4">
+        <h3>Simulation <code>simul</code></h3>
+
+        <p>100 realisations of the observation process of your model,
+          under the <code>ode</code> formalism:</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./simul ode -J 100 --traj
+</pre>
+
+        <p>The same, but accounting for demographic stochasticity through the <code>psr</code> formalism:</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./simul psr -J 100 --traj
+</pre>
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>X_id.csv</code>, <code>hat_id.csv</code>
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://www.gnu.org/software/gsl/manual/html_node/">Galassi, M. <em>et. al.</em> (2009)</a>
+          <br>
+	  <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://arxiv.org/pdf/0802.0021.pdf">Breto, C. et al (2009)</a>
+        </p>
+
+      </div>
+
+      <div class="span4">
+        <h3>Particle Filter <code>smc</code></h3>
+
+        <p>Run a particle filter (a.k.a <strong>Sequential Monte Carlo</strong>) to reconstruct the trajectories of the system given the data, using 100 particles:</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./smc psr -J 100 --traj</pre>
+
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>X_id.csv, hat_id.csv, pred_res_id.csv</code>
+        </p>
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=210672&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D210672">Gordon, N., Salmon, D. and Smith, A. (1993)</a>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://www.cs.ubc.ca/~arnaud/doucet_johansen_tutorialPF.pdf">Doucet, A. and Johansen, A. (2008)</a>
+        </p>
+
+
+      </div>
+
+      <div class="span4">
+        <h3>Kalman Filter <code>kalman</code></h3>
+
+        <p>
+          Use an <strong>Extended Kalman Filter</strong> if you
+          believe the world is Gaussian and don't want to deal with
+          particles.  Note that the EKF will only work under
+          the <code>sde</code> formalism.
+        </p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./kalman sde --traj
+</pre>
+
+        
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>X_id.csv, hat_id.csv</code>
+        </p>
+
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://books.google.fr/books/about/Stochastic_Processes_and_Filtering_Theor.html?id=nGlSNvKyY2MC&redir_esc=y">Jazwinski, A.H. (1970)</a>
+          <br>
+	  <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://lib.tkk.fi/Diss/2006/isbn9512281279/isbn9512281279.pdf">Sarkka, S. (2006)</a>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="page-header">
+      <h1>Optimization <small>Find a mode</small></h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span4">
+        <h3>Simplex <small>(and least-squares)</small> <code>simplex</code></h3>
+        <p>When there is no stochasticity in your model and you can ignore the observation process, run a Simplex for 10000 iterations to minimize the least-squares distance.</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./simplex -M 10000 --least_square
+</pre>
+
+        <p>Observation noise might matter:</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./simplex -M 10000
+</pre>
+
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>trace_id.csv</code>
+        </p>
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://comjnl.oxfordjournals.org/content/7/4/308.short">Nelder, J. and Mead, R. (1965)</a>
+        </p>
+
+        
+      </div>
+
+      <div class="span4">
+        <h3>Simplex-Kalman <code>ksimplex</code></h3>
+
+        <p>If the demographic or environmental noise contained in your model are important, but you want
+          to keep it fast, use a simplex-kalman method instead</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./ksimplex -M 10000
+</pre>
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>trace_id.csv</code>
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://comjnl.oxfordjournals.org/content/7/4/308.short">Nelder, J. and Mead, R. (1965)</a>
+        </p>
+
+      </div>
+
+      <div class="span4">
+        <h3>Iterated filtering <code>mif</code></h3>
+
+        <p>If you want to find the maximum likelihood estimates without SDE or Gaussian approximations, accounting for both process and observation noise, use <em>Maximum Likelihood via
+            Iterated filtering</em> (MIF):</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./mif sto -J 1000 -M 100 -a 0.95 -b 3
+</pre>
+
+        <p>
+          Explore available options
+          (e.g. <code>-a</code>, <code>-M</code>, ...). Ask for help
+          on any method, e.g. for mif use <code>./mif
+            --help</code>.
+        </p>
+
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>trace_id.csv</code>, <code>mif_id.csv</code>
+        </p>
+
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://arxiv.org/abs/0902.0347">Ionides, E. <em>et al.</em> (2011)</a>
+        </p>
+
+
+      </div>
+
+    </div>
+
+    <div class="alert">
+      <strong>By default, these algorithms maximize the log-likelihood.</strong> To prepare for a posterior density 
+      exploration, account for the prior with <code>--prior</code>.
+    </div>
+
+
+    <div class="page-header">
+      <h1>Sampling <small>Bayesian methods</small></h1>
+    </div>
+
+    <div class="row">
+      
+      <div class="span12">
+        <p>
+	  Different strategies can be implemented to explore
+	  intractable and complex posterior densities.  The currently
+	  implemented algorithms, <code>kmcmc</code>
+	  and <code>pmcmc</code>, rely on a random walk exploration of
+	  the parameter space.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="span4">
+        <h3>Kalman MCMC <code>kmcmc</code></h3>
+
+        <p> 
+          If the Gaussian and SDE approximations are sufficient, 
+          or you want to avoid spending too much time learning what the target density looks like,
+          use the <code>kmcmc</code> method.
+        </p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./kmcmc sde --full -M 10000 --acc
+</pre>
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>trace_id.csv</code>, <code>X_id.csv</code>, <code>hat_id.csv</code>, <code>acc_id.csv</code> 
+        </p>
+
+	<p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://arxiv.org/abs/1203.5950">Dureau, J., Kalogeropoulos, K. and Baguelin M. (2013)</a>
+        </p>
+
+      </div>
+
+      <div class="span4">
+        <h3>Particle MCMC <code>pmcmc</code></h3>
+
+        <p>If the Gaussian or SDE approximation is not sufficient, rely on particles using the pMCMC algorithm:</p>
+
+        <pre class="prettyprint">plom pipe theta.json | ./pmcmc psr -J 1000 -M 10000 --full --acc
+</pre>
+
+
+        <p><i class="icon-eye-open"></i> Plot:
+          <code>trace_id.csv</code>, <code>X_id.csv</code>, <code>hat_id.csv</code>, <code>acc_id.csv</code> 
+        </p>
+
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://onlinelibrary.wiley.com/doi/10.1111/j.1467-9868.2009.00736.x/abstract">Andrieu, C., Doucet, A. and Holenstein, R. (2010)</a>
+        </p>
+
+      </div>
+
+      <div class="span4">
+        <h3>SMC2 <code>smc2</code></h3>
+
+        <div class="alert alert-info">
+          Working on it... Pull request welcome on <a href="https://web.archive.org/web/20130715205144/https://github.com/plom-io/plom-pipe">github</a>.
+        </div>
+
+        <p>
+          <i class="icon-book"></i> <a href="https://web.archive.org/web/20130715205144/http://onlinelibrary.wiley.com/doi/10.1111/j.1467-9868.2012.01046.x/abstract">Chopin, N., Jacob, P. E., Papaspiliopoulos O. (2012)</a>
+        </p>
+
+
+
+
+      </div>
+
+    </div>
+
+
+    <div class="alert">
+      Adaptive forms of these algorithms have been implemented
+      (<code>--full</code>), so that sampling performance improves as
+      information is collected on the target density. <strong>Recycle
+      what has been learned in previous runs by using
+      the <code>-T</code> and <code>-C</code> options of <code>plom
+      pipe</code>.</strong>
+    </div>
+
+
+
+    <div class="page-header">
+      <h1>Forecasting <small>Taking into account parameter uncertainties</small></h1>
+    </div>
+
+    <div class="row">
+      
+      <div class="span6">
+        <h3>Sample trajectories</h3>
+
+        <p>
+          The <code>-n, --n_traj</code> option of <code>pmcmc</code>
+          and <code>kmcmc</code> allows you to specify the number of
+          trajectories that should be sampled during the random walk.
+        </p>
+
+      </div>
+
+      <div class="span6">
+        <h3>Predict</h3>
+        
+        <p>
+          <code>plom predict</code> allows you to leverage these
+          sampled trajectories to create an <strong>array of
+          theta.json</strong> that can be used as the initial
+          conditions of a simulation. See plom help predict for all
+          the available options.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="page-header">
+      <h1>Designs <small>robust and reproducible inference</small></h1>
+    </div>
+
+    <ul>
+      <li>
+        Ensure full reproducibility of the results by archiving all the
+        command line options invoked in one file: <code>design.json</code>.
+      </li>
+      <li>
+        Provide an unit of resource allocation in clusters. A design
+        corresponds to <strong>one allocation of computational resources</strong>.
+      </li>
+
+      <li>
+        Abstract commonly used operations like exporing a likelihood
+        landscape by starting from different initial conditions drawn
+        from a latin hypercube sample, or doing likelihood slices or
+        profiles. These operations are abstracted by generating
+        a <code>design.csv</code> file identical to
+        a <code>trace_id.csv</code> file. 
+        
+        <code>design.csv</code> contains:
+        <ul>
+          <li>header identical to <code>trace_id.csv</code></li>
+          <li>one parameter set per line</li>
+        </ul>
+        
+        <code>plom pipe</code> is then used to convert each line of
+        these files into a <code>theta.json</code> using <code>plom
+          pipe theta.json -D design.csv -b line_number</code>.
+      </li>
+
+    </ul>
+    
+
+    <h3>design.json</h3>
+
+    <div class="row">
+
+      <div class="span4">
+
+        <pre class="prettyprint">{
+  "id": "custom",
+  "source": "design.csv"
+  "name": "results",
+  "description": "different initial conditions",
+  "cmd": [
+    {
+      "pipe": "-D",
+      "algorithm": "simplex -M 1000"
+    }
+  ]
+}
+</pre>
+
+      </div>
+
+      <div class="span8">
+        <ul>
+          <li>
+            <code>name</code> A name that will be used to create the root directory of the results.
+          </li>
+
+          <li>
+            <code>description</code> A description of the design.
+          </li>
+
+          <li>
+            <code>cmd</code> A list of objects containing:
+            <ul>
+              <li>
+                <code>pipe</code> a string of <code>plom
+                  pipe</code>options. In the case
+                of <code>-T</code>, <code>-X</code>, <code>-D</code>
+                or <code>-C</code>, the argument (specifying the file to
+                read) has to be <strong>omitted</strong> as it will be
+                automatically assigned.
+              </li>
+              <li>
+                <code>algorithm</code> the inference method to use with
+                all the necessary options specified.
+              </li>
+              <li>
+                <code>repeat</code> the number of
+                repetitions of the command (default to 1).
+              </li>
+              <li>
+                <code>overwrite</code> boolean determining whether to
+                overwrite or save the results of an intermediate step
+                of the <code>cmd</code> list. Set
+                to <code>false</code> to save intermediate results of
+                a list of <code>cmd</code> (default
+                to <code>true</code>).
+              </li>
+            </ul>
+          </li>
+
+
+          <li>
+            <code>id</code> the type of design (<small>click to see id
+            specific properties</small>):
+
+            <div class="accordion" id="designId">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#designId" href="https://web.archive.org/web/20130715205144/http://plom.io/cli/methods#collapseCustom">
+                    <code>"id": "custom"</code>
+                  </a>
+                </div>
+                <div id="collapseCustom" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <ul>
+                      <li>
+                        <code>source</code>: a path to a <code>design.csv</code>
+                        file or a native JSON array.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#designId" href="https://web.archive.org/web/20130715205144/http://plom.io/cli/methods#collapseLhs">
+                    <code>"id": "lhs"</code>
+                  </a>
+                </div>
+                <div id="collapseLhs" class="accordion-body collapse">
+                  <div class="accordion-inner">
+
+                    <p>
+                      Simplifies the generation
+                      of <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Latin_hypercube_sampling">Latin
+                      Hypercube Sampling</a>
+                      designs. A <code>design.csv</code> will be
+                      automatically created, sampling each parameter
+                      value between the <code>min</code>
+                      and <code>max</code> properties
+                      of <code>theta.json</code>.
+                    </p>
+
+                    <ul>
+                      <li>
+                        <code>H</code>: The number of samples to be drawn.
+                      </li>
+                      <li>
+                        <code>seed</code>: A string seeding the random number
+                        generator used to generate the LHS.
+                      </li>
+                      <li>
+                        <code>correlate</code> A list of objects of the form:
+                        <pre class="prettyprint">                
+"correlate": [
+  {
+    "y": "r0:city2__all",
+    "x": "r0:city1__all",
+    "f": "identity",
+    "range": [-1, 1]
+  }
+],
+                        </pre>
+
+                        <p>
+                          The correlate property allows you to constrain
+                          the LHS by setting <code>y = f(x) + e</code>
+                          with <code>e</code> drawn from an uniform
+                          distribution on <code>range</code> and <code>f</code>: <code>identity</code> or <code>inverse</code>.
+                        </p>
+
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#designId" href="https://web.archive.org/web/20130715205144/http://plom.io/cli/methods#collapseSlice">
+                    <code>"id": "slice"</code>, <code>"id": "profile"</code>
+                  </a>
+                </div>
+                <div id="collapseSlice" class="accordion-body collapse">
+                  <div class="accordion-inner">
+
+                    <p>
+                      Generate a <code>design.csv</code> file
+                      containing <code>H</code> regularly spaced samples
+                      between the <code>min</code>
+                      and <code>max</code> properties
+                      of <code>theta.json</code>. For profiles,
+                      the <code>sd_transf</code> property of the
+                      parameter being profiled will be set to 0.
+                    </p>
+
+                    <ul>
+                      <li>
+                        <code>H</code>: the number of points.
+                      </li>
+                      <li>
+                        <code>par</code>: A list of parameters to be sliced or profiled of the form <code>parameterName:parameterGroup</code>
+                        e.g. 
+                        <pre class="prettyprint">"par": ["r0:city1_all", "v:all"]</pre>
+                        If <code>par</code> is omitted, all the parameters will be sliced or profiled.
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#designId" href="https://web.archive.org/web/20130715205144/http://plom.io/cli/methods#collapseReplicate">
+                    <code>"id": "replicate"</code>
+                  </a>
+                </div>
+                <div id="collapseReplicate" class="accordion-body collapse">
+                  <div class="accordion-inner">
+
+                    Replicate the list of <code>cmd</code> <code>H</code> time <em>in parallel</em>
+                    <ul>
+                      <li>
+                        <code>H</code>: the number of replicates
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="span12">
+
+        <div class="accordion" id="lhss">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#lhss" href="https://web.archive.org/web/20130715205144/http://plom.io/cli/methods#lhssContent">Advanced design.json example</a>
+            </div>
+            <div id="lhssContent" class="accordion-body collapse">
+              <div class="accordion-inner">
+
+                <pre class="prettyprint">{
+  "id": "lhs",
+  "name": "lhss",
+  "description": "LHS on steroids",
+  "correlate": [
+    {
+      "y": "r0:city2__all",
+      "x": "r0:city1__all",
+      "f": "identity",
+      "range": [-1, 1],
+      "comment": "r0:city2_all is constrained to take the value of r0:city1__all plus some random noise draw from the interval [-1, 1]"
+    }
+  ],
+  "H": 100,
+  "seed": "any string you like",
+  "cmd": [
+    {
+      "comment": "Get the initial conditions by skipping 1000 time steps",
+      "pipe": "-D",
+      "algorithm": "simul ode -T 1000"
+    },
+    {
+      "comment": "Refines the estimate of these (-X) values only (-I) using a simplex (least-squares) and save these intermediate results",
+      "pipe": "-D -X -I",
+      "algorithm": "simplex --least_square -M 20000",
+      "overwrite": false
+    },
+    {
+      "comment": "Concludes with a MIF that is now happily initialized and repeat that 3 times (chaining)",
+      "pipe": "-T",
+      "algorithm": "mif psr -J 4000 -M 100",
+      "repeat": 3
+    }
+   ]
+}
+</pre>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="span6">
+        <h3>Template</h3>
+
+        <p>
+          <code>plom design</code> allows you to quickly template the most
+          common designs.
+        </p>
+        <aside> 
+          See <code>plom help design</code> for all the possible
+          options.
+        </aside>
+
+
+        <h3>Inference pipeline</h3>
+
+        A standard routine is to:
+
+        <ol>
+          <li>
+            randomly sample values in the parameter space (using an <code>lhs</code> design)
+          </li>
+          <li>
+            pick the best sample of the LHS and explore the
+            approximated posterior density using a fast but
+            approximat method (<code>kmcmc</code>)
+          </li>
+          <li>
+            use the obtained correlation matrix to efficiently
+            initialise the asymptotically exact particle MCMC
+            algorithm (<code>pmcmc</code>), in its adaptive form.
+          </li>
+        </ol>
+
+        <p>
+          These 3 steps can be abstracted in 3 designs, each
+          corresponding to a different allocation of computational
+          resources and all together forming an inference pipeline.
+        </p>
+
+        <p>
+          <code>plom reduce design.json</code> can be used to reduce a
+          design to a single theta.json and help to transition from
+          one step of the pipeline to the next. See <code>plom help
+          reduce</code> for all the options.
+        </p>
+
+      </div>
+      <div class="span6">
+        <h3>Run</h3>
+
+
+        Once you have a <code>design.json</code> it needs to be
+        <strong>bootstrapped</strong> so that:
+        <ul>
+          <li>
+            the <code>design.csv</code> files are generated (if needed)
+          </li>
+          <li>
+            all the directories necessary to store the results are produced.
+          </li>
+        </ul>
+
+        <h4>On a local cluster</h4>
+        <p>
+          if you have access to a cluster with a queuing system such as <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Oracle_Grid_Engine">SGE</a> or
+          <a href="https://web.archive.org/web/20130715205144/http://en.wikipedia.org/wiki/Portable_Batch_System">PBS</a>, <code>plom
+            bootstrap theta.json design.json [options]</code> can generate
+          bash scripts ready to be processed by your queuing system
+          (see <code>plom help bootstrap</code> for the possible options).
+        </p>
+
+        <div class="alert alert-info">
+          If your queuing system is not
+          supported, <a href="https://web.archive.org/web/20130715205144/https://github.com/plom-io/plom-design/issues/new">add
+          an issue</a> or send us a pull request
+          on <a href="https://web.archive.org/web/20130715205144/https://github.com/plom-io/plom-design">github</a>.
+        </div>
+
+
+        <h4>On your local machine</h4>
+        <p>
+          Designs can be run on your local machine by simply adding the <code>--run</code> options, so it looks like: <code>plom bootstrap theta.json design.json --run</code>
+        </p>
+
+        <h4>On the cloud with PLOM.IO</h4>
+        <p>
+          It is as easy as <code>plom commit theta.json design.json --run</code>.
+        </p>
+
+        <p>
+          If you want to run a full inference pipeline made of several sequential designs, simply run:
+          <code>plom commit theta.json design1.json design2.json design3.json --run</code>
+        </p>
+
+      </div>
+    </div>
+
+
+
+    <div class="page-header">
+      <h1>Be social <small>Commit your results on PLOM.IO</small></h1>
+    </div>
+
+    <div class="row">
+      <div class="span6">
+
+        <p>
+          If you run your design on the cloud using PLOM.IO your are good to
+          go, otherwise simply run
+          <code>plom commit design.json</code>
+        </p>
+        
+        <p>
+          Point your browser to http://plom.io/username and get the results of the
+          PLOM.IO automatic review for your model implementation. From here you can decide to make your
+          results available to the world and get the extra benefit of peer
+          review and notifications, should your results become outcompeted by a new model.
+        </p>
+
+      </div>
+    </div>
+
+    <a href="https://web.archive.org/web/20130715205144/http://plom.io/cli/hpc" class="btn btn-primary">High Performance Computing</a>   
+
+  </div>
+</div>
+
+
+
+
+</div> <!-- end container -->
+<div id="push"></div>
+ <!-- end wrap -->
+
+<div id="footerGradient" class="plom-gradient"></div>
+<footer>
+  <div class="container">
+    
+    <p>© Copyright 2013 PLOM.IO. All rights reserved.</p>
+
+    <a href="https://web.archive.org/web/20130715205144/http://plom.io/">Home</a> | <a href="https://web.archive.org/web/20130715205144/http://plom.io/about">About us</a> | <a href="https://web.archive.org/web/20130715205144/http://plom.io/weblog">Weblog</a>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 20:51:44 Jul 15, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 14:28:06 Jul 22, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+</body></html>

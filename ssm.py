@@ -3,6 +3,7 @@ import seaborn
 import pandas as pd
 import os
 import json
+from sklearn.neighbors import NearestNeighbors
 
 colours = seaborn.color_palette("deep", 8)
 flags = ""
@@ -156,9 +157,10 @@ def summary(jsonfile = "mle") :
 	for key, value in s["resources"][0]["data"].items() :
 		print("%s" % key + "\t" + "%s" % value).expandtabs(20)
 
-	if jsonfile is not "mle" :
-		for key, value in s["resources"][2]["data"].items() :
-			print("%s" % key + "\t" + "%s" % value).expandtabs(20)
+	if len(s["resources"]) > 2 :
+		print("\nLog likelihood" + "\t" + "%s" % s["resources"][2]["data"]["log_likelihood"]).expandtabs(20)
+		print("DIC" + "\t" + "%s" % s["resources"][2]["data"]["DIC"]).expandtabs(20)
+		print("AIC" + "\t" + "%s" % s["resources"][2]["data"]["AIC"]).expandtabs(20)
 
 
 
@@ -238,7 +240,7 @@ def blackbox(short = False) :
 		ksimplex()
 		kmcmc()
 		pmcmc(steps = 500000)
-		plotsim()
+		plotsim("pmcmc")
 
 	else :
 		compile()
@@ -256,9 +258,36 @@ def blackbox(short = False) :
 
 
 
-# Latin hypercube initial conditions setup
-def lhs(IC = 500, accept = 10) :
-	print "Come back later."
+# Generate a set of uncorrelated, space-filling initial conditions 
+# using Mitchell's Best Candidate algorithm to approximate a Poisson disc sampling
+def icsetup(IC = 5000, candidates = 500) :
+
+	# Evaluate the number of dimensions
+	dimensions = len(pd.read_json("theta.json").resources[0]["data"])
+
+	print "Creating %d initial parameter value sets over %d parameters, using %d candidates per point." % (IC, dimensions, candidates)
+
+	# Seed the parameter space with a single uniform sample
+	initialconditions = np.random.rand(1, dimensions)
+
+	# We get each accepted LH point by :
+	for i in range(1, IC) :
+		
+		# Generating some candidate points
+		c = np.random.rand(candidates, dimensions)
+
+		# Selecting the candidate with the greatest distance to its nearest neighbour
+		idx = np.argmax(NearestNeighbors(n_neighbors = 1).fit(initialconditions).kneighbors(c)[0])
+
+		# And keeping that one
+		initialconditions = np.append(initialconditions, np.reshape(c[idx, :], (1, dimensions)), axis = 0)
+
+	
+	# Next, 
+
+
+
+
 	# TODO : Create IC initial conditions, sampled from parameter space
 	# Make a backup of the user's IC files
 	# For each IC, write a new file, run a simplex, ...

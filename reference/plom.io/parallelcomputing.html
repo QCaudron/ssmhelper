@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)https://web.archive.org/web/20130716065811/http://plom.io/cli/hpc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="./parallelcomputing_files/analytics.js"></script>
+<link type="text/css" rel="stylesheet" href="./parallelcomputing_files/banner-styles.css">
+
+
+
+
+
+    <title>PLOM.IO Social Modeling</title>
+
+    <meta name="description" content="PLoM.io Public Library of Models">
+    <meta name="keywords" content="PLoM model data inference social">
+    <meta name="author" content="Sebastien Ballesteros">
+
+    <link rel="stylesheet" media="screen" type="text/css" href="./parallelcomputing_files/jquery-ui-1.10.2.custom.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./parallelcomputing_files/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./parallelcomputing_files/prettify.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="./parallelcomputing_files/doc.css">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	<script src="/web/20130716065811/http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="./parallelcomputing_files/jquery-1.9.1.min.js"></script><style type="text/css"></style>
+    <script type="text/javascript" src="./parallelcomputing_files/set_active_menu.js"></script>
+    <script src="./parallelcomputing_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./parallelcomputing_files/prettify.js"></script>
+    <script type="text/x-mathjax-config;executed=true"> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+    <script type="text/javascript" src="./parallelcomputing_files/MathJax.js"></script>
+
+
+<link rel="stylesheet" media="screen" type="text/css" href="./parallelcomputing_files/white.css">
+<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+
+  <body onload="prettyPrint()"><div id="MathJax_Message" style="display: none;"></div><div id="wm-ipp" lang="en" class="__wb_banner_div" style="display: block; position: relative; padding: 0px 5px; min-height: 70px; min-width: 800px;">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif!important;">
+   
+
+</div>
+</div>
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app3.us.archive.org";}; </script>
+
+<script type="text/javascript" src="./parallelcomputing_files/disclaim-element.js"></script>
+<script type="text/javascript" src="./parallelcomputing_files/graph-calc.js"></script>
+<script type="text/javascript" src="./parallelcomputing_files/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/plom.io\/cli\/hpc";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "16";
+var displayMonth = "Jul";
+var displayYear = "2013";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+
+  <div id="wrap">
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <a class="brand" href="https://web.archive.org/web/20130716065811/http://plom.io/">PLOM.IO Public Library of Models</a>
+
+
+          <ul class="nav pull-right">
+              <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/faq"><i class="icon-question-sign icon-white"></i></a></li>        
+              <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/api">API</a></li>        
+              <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/cli">CLI</a></li>        
+            
+            <li> <a href="https://web.archive.org/web/20130716065811/http://plom.io/login">Login</a> </li>
+            <li> <a href="https://web.archive.org/web/20130716065811/http://plom.io/register">Register</a> </li>
+            
+          </ul>
+
+          <form action="https://web.archive.org/web/20130716065811/http://plom.io/search" class="navbar-search" method="POST">
+            <input class="search-query" type="text" name="q" id="plom-search" placeholder="Search the library for contexts or models">
+            
+            <button type="submit" class="btn hide">Search</button>
+          </form>
+          
+        </div>
+        <div id="topGradient" class="plom-gradient"></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+
+</div>
+
+<div id="submenu">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <ul class="breadcrumb">
+          <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/cli">CLI</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/cli/grammar">Grammar</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/cli/methods">Methods</a> <span class="divider">»</span></li>
+          <li class="active"><a href="./parallelcomputing_files/parallelcomputing.html">High Performance Computing</a> <span class="divider">»</span></li>
+          <li><a href="https://web.archive.org/web/20130716065811/http://plom.io/cli#workflow">Workflow</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="main">
+
+    <div class="page-header">
+      <h1>High Performance Computing <small>Leverage multi-core CPUs and multiple machines</small></h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span8">
+        <h3>Parallel version of particle based methods</h3>
+
+        <p>
+          <code>simul</code>, <code>smc</code>, <code>pmcmc</code>, <code>smc2</code>
+          and <code>mif</code> are implemented to be able to fully
+          leveraging all the core of the host machine.
+        </p>
+
+        <p>
+          The number of <strong>threads</strong> used by the algorithm
+          can be specified using the <code>--n_thread, -N</code> option.
+        </p>
+
+        <p>
+          For instance the following command will run a pMCMC
+          algorithm for 1 million iterations (<code>-M</code>) using 8
+          threads (<code>-N</code>) to deal with the 10000 particles
+          (<code>-J</code>).
+        </p>
+        
+        <pre class="prettyprint">plom pipe theta.json | ./pmcmc -M 1e6 -J 10000 -N 8</pre>
+        
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="span8">
+        <h3>Queues</h3>
+
+        <p>
+          Another way to leverage multiple cores or multiple machines
+          is to run simultaneously independent tasks (think for
+          instance of a latin hyper cube sampling of the parameter
+          space, or independant chains of an MCMC
+          sampler).
+        </p>
+
+        <p>
+          <code>plom</code> provide several simple ways to use or
+          create <strong>queues</strong>.  Tasks added to a queue will
+          be processed in parallel (and independantly) up to a
+          <strong>concurrency limit</strong>.
+        </p>
+
+        <p>
+          <code>plom boostrap</code> let you leverage either a local
+          queue (<code>--run [concurrency]</code>) requiring no
+          installation from your side or, more complex queuing systems
+          adapted to dispatch jobs to multiple machines such
+          as <a href="https://web.archive.org/web/20130716065811/http://en.wikipedia.org/wiki/Oracle_Grid_Engine">SGE</a>
+          (<code>--engine SGE</code>) or
+          <a href="https://web.archive.org/web/20130716065811/http://en.wikipedia.org/wiki/Portable_Batch_System">PBS</a>
+          (<code>--engine PBS</code>).
+        </p>    
+
+        <p>
+          You can combine <code>--n_thread, -N</code> and queues to run
+          independant multi-threaded tasks concurently.
+        </p>
+      </div>
+    </div>
+
+    <h3>Sending particles across the network</h3>
+
+    <div class="row">
+
+      <div class="span6">
+        <h4>Particle server</h4>
+        
+        <p>
+          If the time to process a particle is significant, you can
+          try to use multiple machine to process all the particles of
+          a given algorithm. With the <code>-Z, --zmq</code> option,
+          an algorithm can be transformed into a <strong>particle
+          server</strong>, dispatching particles all accross the
+          network.
+        </p>
+
+        <p>
+          For instance the following example show a <code>pmcmc</code>
+          algorithm dispatching 160 particles (<code>-J</code>) by
+          batch of 16 (<code>--Jchunk, -c</code>) to
+          connected <strong>workers</strong>.
+        </p>
+        <pre class="prettyprint">plom pipe theta.json | ./pmcmc -M 1000 -J 160 -c 16 --zmq</pre>
+      </div>
+
+      <div class="span6">
+
+        <h4>Workers (clients)</h4>
+
+        <p>
+          A <code>worker</code> wait that the particle server send
+          a <strong>chunk of particles</strong>, process it as fast as
+          possible and send results back to the server.
+        </p>
+
+        <p>
+          When created (in different machines), workers need to be
+          passed the domain name or IP address of the particule server
+          to listen using the (<code>--host, -h</code>) option. Note
+          that workers can be multi-threaded. For instance the worker
+          below will process its batch of particles using 8 threads (<code>-N</code>).
+        </p>        
+
+        <pre class="prettyprint">plom pipe theta.json | ./worker -c 16 -N 8 --host ip.of.the.server</pre>        
+
+        <p>
+          Last, wokers can be added dynamically. In the absence of
+          workers, the particle server will just wait for workers
+          connections.
+        </p>       
+        
+      </div>
+    
+    </div>
+
+
+    <a href="https://web.archive.org/web/20130716065811/http://plom.io/cli#workflow" class="btn btn-primary">Revise the worflow</a>       
+
+  </div>
+</div>
+
+
+
+
+
+
+</div> <!-- end container -->
+<div id="push"></div>
+ <!-- end wrap -->
+
+<div id="footerGradient" class="plom-gradient"></div>
+<footer>
+  <div class="container">
+    
+    <p>© Copyright 2013 PLOM.IO. All rights reserved.</p>
+
+    <a href="https://web.archive.org/web/20130716065811/http://plom.io/">Home</a> | <a href="https://web.archive.org/web/20130716065811/http://plom.io/about">About us</a> | <a href="https://web.archive.org/web/20130716065811/http://plom.io/weblog">Weblog</a>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 6:58:11 Jul 16, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 14:28:08 Jul 22, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+</body></html>
