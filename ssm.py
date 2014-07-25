@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 import seaborn
+import numpy as np
 import pandas as pd
 import os
 import json
 from sklearn.neighbors import NearestNeighbors
+import shutil
 
 colours = seaborn.color_palette("deep", 8)
 flags = ""
@@ -54,15 +56,17 @@ def sim(jsonfile = "mle", out = 0) :
 
 
 # Simplex
-def simplex(steps = 10000, jsonfile = "mle") :
+def simplex(steps = 10000, jsonfile = "mle", silent = False) :
 	os.chdir("bin")
 
 	if os.path.isfile("../%s.json" % jsonfile) :
-		print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
+		if not silent :
+			print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
 		os.system("cat ../%s.json | ./simplex -M %d > ../out.json" % (jsonfile, steps))
 
 	else :
-		print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
+		if not silent :
+			print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
 		os.system("cat ../theta.json | ./simplex -M %d > ../out.json" % (steps))
 	
 	os.rename("../out.json", "../mle.json")
@@ -260,7 +264,7 @@ def blackbox(short = False) :
 
 # Generate a set of uncorrelated, space-filling initial conditions 
 # using Mitchell's Best Candidate algorithm to approximate a Poisson disc sampling
-def icsetup(IC = 5000, candidates = 500) :
+def icsetup(IC = 5000, candidates = 50) :
 
 	# Evaluate the number of dimensions
 	dimensions = len(pd.read_json("theta.json").resources[0]["data"])
@@ -269,6 +273,9 @@ def icsetup(IC = 5000, candidates = 500) :
 
 	# Seed the parameter space with a single uniform sample
 	initialconditions = np.random.rand(1, dimensions)
+
+	# Fit of each IC
+	fits = []
 
 	# We get each accepted LH point by :
 	for i in range(1, IC) :
@@ -281,10 +288,85 @@ def icsetup(IC = 5000, candidates = 500) :
 
 		# And keeping that one
 		initialconditions = np.append(initialconditions, np.reshape(c[idx, :], (1, dimensions)), axis = 0)
+	
+
+	# Next, generate a matrix of parameter ranges
+	
+	# Grab a list of parameter names
+	with open("theta.json") as f :
+		theta = json.load(f)["resources"][0]["data"].keys()
 
 	
-	# Next, 
+	# Find which files they're in
+	with open("ssm.json") as f :
+		ssminputs = json.load(f)["inputs"]
 
+	thetafiles = {}
+	thetabounds = {}
+
+	for var in ssminputs :
+		if var["name"] in theta :
+			thetafiles[var["name"]] = var["require"]["path"]
+		elif var["require"].setdefault("name", False) in theta : 
+			thetafiles[var["require"]["name"]] = var["require"]["path"]
+
+
+	# Make a backup of theta
+	if not os.path.exists("data/backup/") :
+		os.mkdir("data/backup/")
+
+	shutil.copy("theta.json", "data/backup/theta.json")
+
+
+	# Grab the bounds of the uniform distributions around the parameters
+	for param, loc in zip(thetafiles.keys(), thetafiles.values()) :
+		with open(loc) as f :
+			p = json.load(f)
+			thetabounds[param] = np.sort([p["distributionParameter"][0]["value"], p["distributionParameter"][1]["value"]])
+
+
+	# Generate initial conditions based on these bounds and our sampling
+	for i, var in enumerate(theta) :
+		initialconditions[:, i] *= (thetabounds[var][1] - thetabounds[var][0])
+		initialconditions[:, i] += thetabounds[var][0]
+
+
+	# Construct a new theta file JSON object
+	with open("theta.json") as f :
+		outtheta = json.load(f)
+
+
+
+	# Loop over these initial conditions, generating a new theta file
+	for i in range(IC) : # looping over initial conditions
+		for j, par in enumerate(theta) : # looping over parameters
+			outtheta["resources"][0]["data"][par] = initialconditions[i, j]
+
+		# Write the file for initial condition i
+		with open("theta.json", "w") as f :
+			json.dump(outtheta, f)
+
+		# Run a simplex
+		simplex(jsonfile = "theta", silent = True)
+
+		# Read in the fit
+		with open("mle.json") as f :
+			fits.append(json.load(f)["resources"][-1]["data"]["log_likelihood"])
+
+		print "%d / %d. Log likelihood : %f" % (i, IC, fits[-1])
+
+	print "BEST LOG LIKELIHOOD : %f" % fits[np.argmax(fits)]
+
+
+
+	# Write these parameter values to mle.json
+	for j, par in enumerate(theta) :
+		outtheta["resources"][0]["data"][par] = initialconditions[np.argmax(fits), j]
+
+	with open("mle.json", "w") as f :
+		json.dump(outtheta, f)
+
+	print "Parameter conditions for this written to mle.json."
 
 
 
