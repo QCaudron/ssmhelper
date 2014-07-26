@@ -6,6 +6,8 @@ import os
 import json
 from sklearn.neighbors import NearestNeighbors
 import shutil
+from multiprocessing import Pool
+from multiprocessing.dummy import Pool as ThreadPool
 
 colours = seaborn.color_palette("deep", 8)
 flags = ""
@@ -56,20 +58,19 @@ def sim(jsonfile = "mle", out = 0) :
 
 
 # Simplex
-def simplex(steps = 10000, jsonfile = "mle", silent = False) :
+def simplex(steps = 10000, jsonfile = "mle", silent = False, out = "mle") :
 	os.chdir("bin")
 
 	if os.path.isfile("../%s.json" % jsonfile) :
 		if not silent :
-			print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
-		os.system("cat ../%s.json | ./simplex -M %d > ../out.json" % (jsonfile, steps))
+			print "Simplex on ../%s.json, %d iterations." % (jsonfile, steps)
+		os.system("cat ../%s.json | ./simplex -M %d > ../%s.json" % (jsonfile, steps, out))
 
 	else :
 		if not silent :
 			print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
-		os.system("cat ../theta.json | ./simplex -M %d > ../out.json" % (steps))
+		os.system("cat theta.json | ./simplex -M %d > ../%s.json" % (steps, out))
 	
-	os.rename("../out.json", "../mle.json")
 	os.chdir("..")
 
 	# TODO : Create flags for turning off demographic stochasticity, white noises and diffusions
@@ -226,7 +227,7 @@ def kmcmc(steps = 100000, jsonfile = "mle", out = 0, burn = 10000) :
 		print "%s.json does not exist, performing Kalman MCMC using theta.json, %d iterations ( %d burn-in )." % (jsonfile, steps, burn)
 		os.system("cat ../theta.json | ./kmcmc -M %d | ./kmcmc -M %d -P .. --trace -I %d%s > ../out.json" % (jsonfile, burn, steps, out, flags))
 
-	os.rename("../out.json",  "../mle.json")
+	os.rename("../out.json",  "../kmcmc.json")
 	os.chdir("..")
 	# TODO : Create flags for turning off demographic stochasticity, white noises and diffusions
 
@@ -262,9 +263,24 @@ def blackbox(short = False) :
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Generate a set of uncorrelated, space-filling initial conditions 
 # using Mitchell's Best Candidate algorithm to approximate a Poisson disc sampling
-def icsetup(IC = 5000, candidates = 50) :
+def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 
 	# Evaluate the number of dimensions
 	dimensions = len(pd.read_json("theta.json").resources[0]["data"])
@@ -274,8 +290,6 @@ def icsetup(IC = 5000, candidates = 50) :
 	# Seed the parameter space with a single uniform sample
 	initialconditions = np.random.rand(1, dimensions)
 
-	# Fit of each IC
-	fits = []
 
 	# We get each accepted LH point by :
 	for i in range(1, IC) :
@@ -331,42 +345,64 @@ def icsetup(IC = 5000, candidates = 50) :
 		initialconditions[:, i] += thetabounds[var][0]
 
 
+
 	# Construct a new theta file JSON object
-	with open("theta.json") as f :
-		outtheta = json.load(f)
+		with open("theta.json") as f :
+			outtheta = json.load(f)
 
-
-
-	# Loop over these initial conditions, generating a new theta file
+	# Loop over these initial conditions, generating a new theta file for each
+	packagetheta = []
+	
 	for i in range(IC) : # looping over initial conditions
 		for j, par in enumerate(theta) : # looping over parameters
 			outtheta["resources"][0]["data"][par] = initialconditions[i, j]
+		packagetheta.append(outtheta)
 
-		# Write the file for initial condition i
-		with open("theta.json", "w") as f :
-			json.dump(outtheta, f)
 
-		# Run a simplex
-		simplex(jsonfile = "theta", silent = True)
 
-		# Read in the fit
-		with open("mle.json") as f :
+	# Generate a "package" : 
+	# a list of tuples, with each tuple containing
+	# one initial condition, one parameter list, and one unique ID
+	package = [ ( ictheta, i ) for i, ictheta in enumerate(packagetheta) ]
+
+
+	# Spawn workers
+	pool = ThreadPool(cores)
+
+	# Send them to work
+	pool.map(simplexsampler, package)
+
+
+
+
+	# Once finished, delete all files but the best
+	fits = []
+	for i in range(IC) :
+		with open("simplex%d.json" % i) as f :
 			fits.append(json.load(f)["resources"][-1]["data"]["log_likelihood"])
 
-		print "%d / %d. Log likelihood : %f" % (i, IC, fits[-1])
 
+	# Best fitting simplex
 	print "BEST LOG LIKELIHOOD : %f" % fits[np.argmax(fits)]
 
+
+	for i in range(IC) :
+		if i == np.argmax(fits) :
+			os.rename("simplex%d.json" % i, "lhs.json")
+		else :
+			os.remove("simplex%d.json" % i)
 
 
 	# Write these parameter values to mle.json
 	for j, par in enumerate(theta) :
 		outtheta["resources"][0]["data"][par] = initialconditions[np.argmax(fits), j]
 
-	with open("mle.json", "w") as f :
+	with open("lhs.json", "w") as f :
 		json.dump(outtheta, f)
 
-	print "Parameter conditions for this written to mle.json."
+	print "Parameter conditions for this written to lhs.json."
+
+	simplex(jsonfile = "lhs")
 
 
 
@@ -377,6 +413,55 @@ def icsetup(IC = 5000, candidates = 50) :
 	# Decide if we reject some before ksimplex
 	# What do we do with the top solutions ?
 	# How are they determined ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def simplexsampler( package ) :
+
+	# Unpack the "package"
+	outtheta, ID = package
+
+	# Write the file for initial condition i
+	with open("theta%d.json" % ID, "w") as f :
+		json.dump(outtheta, f)
+
+	# Run a simplex
+	simplex(jsonfile = "theta%d" % ID, silent = False, out = "simplex%d" % ID)
+
+	# Read in the fit
+	with open("simplex%d.json" % ID) as f :
+		fit = json.load(f)["resources"][-1]["data"]["log_likelihood"]
+
+	print "%d. Log likelihood : %f" % (ID, fit)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
