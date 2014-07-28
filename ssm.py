@@ -58,20 +58,21 @@ def sim(jsonfile = "mle", out = 0) :
 
 
 # Simplex
-def simplex(steps = 10000, jsonfile = "mle", silent = False, out = "mle") :
-	os.chdir("bin")
+def simplex(steps = 10000, jsonfile = "mle", sampler = False, out = "mle") :
+	
+	if not sampler :
+		os.chdir("bin")
 
 	if os.path.isfile("../%s.json" % jsonfile) :
-		if not silent :
-			print "Simplex on ../%s.json, %d iterations." % (jsonfile, steps)
-		os.system("cat ../%s.json | ./simplex -M %d > ../%s.json" % (jsonfile, steps, out))
-
+		print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
 	else :
-		if not silent :
-			print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
-		os.system("cat theta.json | ./simplex -M %d > ../%s.json" % (steps, out))
-	
-	os.chdir("..")
+		print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
+		jsonfile = "theta"
+
+	os.system("cat ../%s.json | ./simplex -M %d > ../%s.json" % (jsonfile, steps, out))
+
+	if not sampler :
+		os.chdir("..")
 
 	# TODO : Create flags for turning off demographic stochasticity, white noises and diffusions
 
@@ -370,8 +371,9 @@ def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 	pool = ThreadPool(cores)
 
 	# Send them to work
+	os.chdir("bin")
 	pool.map(simplexsampler, package)
-
+	os.chdir("..")
 
 
 
@@ -439,14 +441,14 @@ def simplexsampler( package ) :
 	outtheta, ID = package
 
 	# Write the file for initial condition i
-	with open("theta%d.json" % ID, "w") as f :
+	with open("../theta%d.json" % ID, "w") as f :
 		json.dump(outtheta, f)
 
 	# Run a simplex
-	simplex(jsonfile = "theta%d" % ID, silent = False, out = "simplex%d" % ID)
+	simplex(jsonfile = "theta%d" % ID, sampler = True, out = "simplex%d" % ID)
 
 	# Read in the fit
-	with open("simplex%d.json" % ID) as f :
+	with open("../simplex%d.json" % ID) as f :
 		fit = json.load(f)["resources"][-1]["data"]["log_likelihood"]
 
 	print "%d. Log likelihood : %f" % (ID, fit)
