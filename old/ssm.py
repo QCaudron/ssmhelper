@@ -3,15 +3,18 @@ import seaborn
 import numpy as np
 import pandas as pd
 import os
+import copy
 import json
 from sklearn.neighbors import NearestNeighbors
 import shutil
 from multiprocessing import Pool
 from multiprocessing.dummy import Pool as ThreadPool
+from IPython.parallel import Client
+from subprocess import call
+
 
 colours = seaborn.color_palette("deep", 8)
 flags = ""
-
 
 
 
@@ -64,9 +67,11 @@ def simplex(steps = 10000, jsonfile = "mle", sampler = False, out = "mle") :
 		os.chdir("bin")
 
 	if os.path.isfile("../%s.json" % jsonfile) :
-		print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
+		if not sampler :
+			print "Simplex on %s.json, %d iterations." % (jsonfile, steps)
 	else :
-		print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
+		if not sampler :
+			print "%s.json does not exist; running Simplex on theta.json, %d iterations.\n" % (jsonfile, steps)
 		jsonfile = "theta"
 
 	os.system("cat ../%s.json | ./simplex -M %d > ../%s.json" % (jsonfile, steps, out))
@@ -219,7 +224,7 @@ def ksimplex(steps = 10000, out = 0, jsonfile = "mle") :
 
 # Kalman MCMC
 def kmcmc(steps = 100000, jsonfile = "mle", out = 0, burn = 10000) :
-	os.chdir("bin")
+	os.chdir("bin")	
 
 	if os.path.isfile("../%s.json" % jsonfile) :
 		print "Kalman MCMC from %s.json, %d iterations ( %d burn-in )." % (jsonfile, steps, burn)
@@ -282,6 +287,9 @@ def blackbox(short = False) :
 # Generate a set of uncorrelated, space-filling initial conditions 
 # using Mitchell's Best Candidate algorithm to approximate a Poisson disc sampling
 def sampleIC(IC = 5000, candidates = 50, cores = 8) :
+
+	if cores > 1 :
+		rc = Client()
 
 	# Evaluate the number of dimensions
 	dimensions = len(pd.read_json("theta.json").resources[0]["data"])
@@ -348,16 +356,17 @@ def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 
 
 	# Construct a new theta file JSON object
-		with open("theta.json") as f :
-			outtheta = json.load(f)
+	with open("theta.json") as f :
+		outtheta = json.load(f)
 
 	# Loop over these initial conditions, generating a new theta file for each
 	packagetheta = []
 	
 	for i in range(IC) : # looping over initial conditions
+		out2 = copy.deepcopy(outtheta)
 		for j, par in enumerate(theta) : # looping over parameters
-			outtheta["resources"][0]["data"][par] = initialconditions[i, j]
-		packagetheta.append(outtheta)
+			out2["resources"][0]["data"][par] = initialconditions[i, j]
+		packagetheta.append(out2)
 
 
 
@@ -372,6 +381,7 @@ def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 
 	# Send them to work
 	os.chdir("bin")
+	#rc.load_balanced_view().map(simplexsampler, [p for p in package])
 	pool.map(simplexsampler, package)
 	os.chdir("..")
 
@@ -391,8 +401,10 @@ def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 	for i in range(IC) :
 		if i == np.argmax(fits) :
 			os.rename("simplex%d.json" % i, "lhs.json")
+			os.remove("theta%d.json % i")
 		else :
 			os.remove("simplex%d.json" % i)
+			os.remove("theta%d.json" % i)
 
 
 	# Write these parameter values to mle.json
@@ -404,7 +416,9 @@ def sampleIC(IC = 5000, candidates = 50, cores = 8) :
 
 	print "Parameter conditions for this written to lhs.json."
 
-	simplex(jsonfile = "lhs")
+	
+
+
 
 
 
